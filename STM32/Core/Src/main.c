@@ -91,15 +91,23 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  int bool = 0;
   while (1)
   {
     /* USER CODE END WHILE */
-	  HAL_GPIO_WritePin(red_GPIO_Port, red_Pin, RESET);
-	  HAL_GPIO_WritePin(yellow_GPIO_Port, yellow_Pin, RESET);
-	  HAL_Delay(1000);
-	  HAL_GPIO_WritePin(red_GPIO_Port, red_Pin, SET);
-	  HAL_GPIO_WritePin(yellow_GPIO_Port, yellow_Pin, SET);
-	  HAL_Delay(1000);
+	if(!bool){
+		// turn on led red and turn off led yellow if bool = 0
+		HAL_GPIO_WritePin(red_GPIO_Port, red_Pin, 0);
+		HAL_GPIO_WritePin(yellow_GPIO_Port, yellow_Pin, 1);
+		bool = 1;
+	}
+	else{
+		// turn on led yellow and turn off led red if bool = 1
+		HAL_GPIO_WritePin(red_GPIO_Port, red_Pin, 1);
+		HAL_GPIO_WritePin(yellow_GPIO_Port, yellow_Pin, 0);
+		bool = 0;
+	}
+	HAL_Delay(500);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
